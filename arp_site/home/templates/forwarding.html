@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% title %}</title>
+    {% if instant == True %}
+        <meta http-equiv="refresh" content="0;URL={% url %}">
+    {% endif %}
+</head>
+<body>
+    Forwarding to <a href="{% url %}">{{ url }}</a>
+</body>
+</html>

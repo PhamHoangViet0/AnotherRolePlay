@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock style %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+<div class="screen">
+    <div class="sidebarL" id="id_sidebarL">
+
+    </div>
+    <div class="sidebarR" id="id_sidebarR">
+
+    </div>
+    <div class="topbar">
+        <div class="left">
+            asd
+        </div>
+        <div class="right">
+            <div class="window" id="id_login_window">
+                
+            </div>
+            <div class="right" id="login_button">
+                <button id="id_login_button">Login!</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="main">
+            <div class="borderL">
+        
+            </div>
+            <div class="content">
+        
+            </div>
+            <div class="borderR">
+        
+            </div>
+        </div>
+    </div>
+
+    <div class="bottombar">
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    window.onload = function(){
+        $("#id_sidebarR").hide(0);
+        $("#id_sidebarL").hide(0);
+        $("#id_login_window").hide(0);
+        $("#id_login_window").animate({
+            top: '-200px'
+        });
+    }
+    $("#id_login_button").click(function(event){
+        $("#id_login_window").show(200);
+        $("#id_login_window").animate({
+            top: '0px'
+        });
+        $("#login_button").animate({
+            top: '-200px'
+        });
+        $("#login_button").hide(200);
+        
+    })
+    $(document).mouseup(function(event){
+        var container = $("#id_login_window");
+        console.log(!container.is(event.target) && container.is(':visible') && !$("#login_button").is(':visible'));
+        if (!container.is(event.target)){
+            container.animate({
+                top: '-200px'
+            });
+            $("#id_login_window").hide(200);
+            $("#login_button").animate({
+                top: '0px'
+            });
+            $("#login_button").show(200);
+        }
+    })
+</script>
+{% endblock javascript %}

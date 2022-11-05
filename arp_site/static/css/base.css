@@ -1,0 +1,74 @@
+body {
+    height: 100%;
+    margin: 0px;
+}
+
+div.screen {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+div.topbar {
+    display: flex;
+    min-height: 80px;
+    max-height: 80px;
+    float: left;
+    justify-content: space-between;
+}
+
+div.left {
+    position: flex;
+    background: red;
+    flex: left;
+    min-width: 400px;
+}
+
+div.right {
+    position: flex;
+    background: red;
+    flex: right;
+    min-width: 400px;
+    flex-direction: column;
+}
+
+div.sidebarR {
+    position: fixed;
+    right: 0;
+    background: blue;
+    height: 100%;
+    min-width: 200px;
+}
+
+div.sidebarL {
+    position: fixed;
+    left: 0;
+    background: blue;
+    height: 100%;
+    min-width: 200px;
+}
+
+div.main {
+    position: relative;
+    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    z-index: 0;
+}
+
+div.borderR {
+    position: relative;
+    background: red;
+    width: 100%;
+}
+
+div.borderL {
+    position: relative;
+    background: red;
+    width: 100%;
+}
+
+div.content {
+    min-height: 1200px;
+    min-width: 850px;
+}

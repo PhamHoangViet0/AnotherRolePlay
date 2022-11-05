@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <div id="id_error_box">
+        <h1 id="id_error_text">
+    </div>
+    <div>
+        <form id="id_form">{% csrf_token %}
+            <label for="id_username" class="required">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" value={{username}}>
+            <label for="id_password" class="required">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+            <input type="hidden" name="next" value="../">
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        window.onload = function(){
+            $("#id_error_box").hide("slow");
+        }
+
+        document.getElementById("id_error_box").onclick = function(){
+            $("#id_error_box").hide("slow");
+        }
+
+        $("#error_box").click(function(event){
+            $("#id_error_box").hide("slow");
+        })
+        $("#id_form").submit(function(event){
+            event.preventDefault();
+            var serializedData = $(this).serialize();
+            console.log(serializedData);
+            $.ajax({
+                type: 'POST',
+                data: serializedData,
+                url: "./",
+                headers: {"X-Requested-With": "XMLHttpRequest"},
+                success: function(response){
+                    if (response["result"] === true) {
+                    }
+                    else{
+                        $("#id_error_text").text(response["error"]).show();
+                        $("#id_error_box").show("fast");
+                    }
+                },
+                error: function(response){
+
+                }
+            })
+        });
+    </script>
+{% endblock javascript %}

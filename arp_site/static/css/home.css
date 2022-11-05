@@ -1,0 +1,10 @@
+
+div.window {
+    position: absolute;
+    background: black;
+    min-height: 200px;
+    min-width: 340px;
+    z-index: 100;
+    right: 0;
+    top: 50px;
+}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{}}
+{% endblock title %}
+
+{% block content %}
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+        window.onload = function(){
+            window.history.pushState({"html": "", "pageTitle": document.title},"", "../");
+        }
+    </script>
+{% endblock javascript %}
