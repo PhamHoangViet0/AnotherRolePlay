@@ -131,3 +131,6 @@ dmypy.json
 
 # PyCharm project info
 .idea
+
+# Configs to access
+config
