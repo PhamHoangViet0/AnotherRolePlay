@@ -7,9 +7,9 @@ logger = logging.getLogger(__name__)
 from discord.ext import commands
 
 
-from cog import terminal, guild
+from cog import terminal, guild, member
 
-COG = [terminal, guild]
+COG = [terminal, guild, member]
 
 
 def cogInit(bot: commands.Bot):

@@ -6,9 +6,6 @@ from discord.ext import commands
 import discord
 
 
-
-
-
 class Template(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
