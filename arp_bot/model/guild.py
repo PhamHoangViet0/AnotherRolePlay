@@ -1,6 +1,7 @@
 import app_exception as exc
 import aiomysql
 import mysql_conn
+from datetime import datetime
 
 
 async def isExist(guild_dc_id):
@@ -112,7 +113,7 @@ WHERE  guild_dc_id = %s; '''
     return res
 
 
-async def get(guild_dc_id):
+async def get_data(guild_dc_id):
     conn: aiomysql.Connection
     async with mysql_conn.pool.acquire() as conn:
         cur: aiomysql.Cursor
@@ -124,6 +125,23 @@ WHERE  guild_dc_id = %s; '''
             await cur.execute(query_get, guild_dc_id)
             res = await cur.fetchone()
     return res
+
+
+async def key(guild_id,
+              key_code,
+              val_time: datetime):
+    conn: aiomysql.Connection
+    async with mysql_conn.pool.acquire() as conn:
+        cur: aiomysql.Cursor
+        async with conn.cursor(aiomysql.DictCursor) as cur:
+            query_key = '''
+REPLACE 
+INTO guild_key_codes
+SET  guild_id = %s,  
+     key_code = %s, 
+     valid_time = %s; '''
+            await cur.execute(query_key, (guild_id, key_code, val_time.strftime('%Y-%m-%d %H:%M:%S')))
+        await conn.commit()
 
 
 class Guild:

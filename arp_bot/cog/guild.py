@@ -8,6 +8,20 @@ import discord
 from decorator import check
 from model import guild as m_guild
 
+import random
+import string
+from datetime import datetime, timedelta
+
+
+LETTER_N_DIGITS = string.ascii_letters + string.digits
+KEY_ACTIVE_TIME = timedelta(minutes=5)
+
+
+def get_random_string(length, symbols):
+    # choose from all lowercase letter
+    result_str = ''.join(random.choice(symbols) for i in range(length))
+    return result_str
+
 
 class Guild(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -139,6 +153,24 @@ class Guild(commands.Cog):
                       f'{gm_terminal_channel.mention}\n' \
                       f'{arp_terminal_category.mention}\n' \
                       f'{arp_talk_category.mention}'
+        await ctx.respond(respond_msg)
+
+    @guild_group_admin.command(name='key', description='Creates key.')
+    @check.guild.load(checks=[
+        check.guild.have_all,
+    ])
+    async def guild_key(self,
+                        ctx: discord.ApplicationContext,
+                        guild_model: m_guild.Guild, ):
+        key_code = get_random_string(16, LETTER_N_DIGITS)
+        val_time = datetime.now() + KEY_ACTIVE_TIME
+        await m_guild.key(guild_model.guild_id,
+                          key_code,
+                          val_time)
+
+        respond_msg = f'Generated key.\n' \
+                      f'key_code: {key_code}\n' \
+                      f'valid: {val_time.strftime("%Y-%m-%d %H:%M:%S")}'
         await ctx.respond(respond_msg)
 
 

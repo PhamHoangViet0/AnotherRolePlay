@@ -75,7 +75,7 @@ def load(checks=None):
                 # raise NoPrivateMessage()
 
             guild_dc_id = ctx.guild.id
-            guild_data = await m_guild.get(guild_dc_id)
+            guild_data = await m_guild.get_data(guild_dc_id)
             if guild_data is None:
                 raise exc.GuildNotRegistered()
 

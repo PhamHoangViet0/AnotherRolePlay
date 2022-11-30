@@ -16,7 +16,7 @@ def check_model(checks=None):
                     check(ctx=ctx, **kwargs)
 
             return await func(self, ctx, *args, **kwargs)
-        
+
         sig = inspect.signature(func)
         parameters = list(sig.parameters.values())
         parameters = [par for par in parameters if par.name != 'kwargs']
