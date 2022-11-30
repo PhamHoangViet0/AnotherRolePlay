@@ -23,6 +23,7 @@ if platform.system() == 'Windows':
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 from cog import cogInit
+import mysql_conn
 
 
 def start_up():
@@ -35,6 +36,11 @@ def start_up():
 
     bot = commands.Bot(command_prefix=bot_settings['prefix'], intents=bot_intents)
     cogInit(bot)
+
+    mysql_conn.loop = bot.loop
+    # mysql_conn.loop = asyncio.new_event_loop()
+    mysql_conn.pool = mysql_conn.get_pool(mysql_conn.loop)
+    # mysql_conn.pool = mysql_conn.get_pool(asyncio.new_event_loop())
 
     bot.run(bot_settings['token'])
 
